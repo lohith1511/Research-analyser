@@ -23,9 +23,7 @@ export default function Upload({ onUploadSuccess }) {
         formData.append('file', file);
 
         try {
-            const res = await axios.post('http://localhost:8000/upload-paper', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
+            const res = await axios.post('http://localhost:9090/upload-paper', formData);
             onUploadSuccess(res.data);
         } catch (err) {
             setError(err.response?.data?.detail || 'Failed to upload file');
