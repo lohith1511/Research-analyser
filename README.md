@@ -1,84 +1,258 @@
-# Research Paper Summarization for Multi-Disciplinary Knowledge Discovery
+# 🔬 Research Analyser — AI Research Paper Assistant
 
-An advanced, placement-ready AI Research Assistant system that allows users to upload PDF research papers, extracts text and concepts, generates intelligent summaries, and provides an interactive chatbot to ask real-time questions about the paper using Semantic Search.
+An advanced AI-powered research assistant that enables users to upload research papers (PDF), extract meaningful concepts, generate high-quality summaries, and interact through a semantic search chatbot using **Retrieval Augmented Generation (RAG)**.
 
-## Folder Structure
+Designed as a placement-ready full-stack AI project demonstrating modern NLP pipelines, vector search, and semantic QA architecture.
+
+---
+
+## 🚀 Features
+
+- 📄 Upload research papers in PDF format
+- 🧠 Automatic text extraction and preprocessing
+- 🔍 Keyword and concept extraction
+- ✨ Abstractive summarization using Transformers
+- ⚡ Semantic search with FAISS vector database
+- 🤖 Retrieval Augmented Generation (RAG) pipeline
+- 💬 Context-aware chatbot Q&A
+- 🎨 Modern React UI
+
+---
+
+## 🛠 Tech Stack
+
+### Backend
+- FastAPI
+- HuggingFace Transformers
+- SentenceTransformers
+- FAISS
+- SpaCy
+- Python
+
+### Frontend
+- React + Vite
+- Axios
+- CSS
+
+---
+
+## 📂 Project Structure
 
 ```
 AI_Research_Assistant/
+│
 ├── backend/
+│   ├── __pycache__/
+│   ├── uploads/
+│   ├── venv/
+│   ├── embeddings.py          # Generate sentence embeddings
+│   ├── keyword_extractor.py   # Extract keywords using SpaCy
 │   ├── main.py                # FastAPI entry point
-│   ├── summarizer.py          # HuggingFace summary generator
-│   ├── pdf_utils.py           # Extracts text from incoming PDFs
-│   ├── keyword_extractor.py   # Spacy keyword extraction
-│   ├── embeddings.py          # SentenceTransformers for embeddings
-│   ├── vector_store.py        # FAISS database operations
-│   ├── qa_engine.py           # Open-ended QA generation
-│   ├── requirements.txt       # Python dependencies
-│   └── uploads/               # Directory where uploaded PDFs are stored
-└── frontend/
-    ├── package.json           # Frontend dependency manifest
-    ├── vite.config.js         # Vite configuration
-    ├── index.html             # HTML entry point
-    └── src/
-        ├── main.jsx           # React DOM rendering
-        ├── App.jsx            # Main Hub Screen layout
-        ├── styles.css         # Modern AI UI premium dark theme
-        └── components/        # Isolated modular React UI components
-            ├── Navbar.jsx
-            ├── Upload.jsx
-            ├── Summary.jsx
-            ├── Chatbot.jsx
-            └── Loader.jsx
+│   ├── pdf_utils.py           # PDF text extraction
+│   ├── qa_engine.py           # Question answering pipeline
+│   ├── rag_engine.py          # Retrieval Augmented Generation logic
+│   ├── summarizer.py          # Text summarization model
+│   ├── vector_store.py        # FAISS vector operations
+│   ├── requirements.txt       # Backend dependencies
+│
+├── frontend/
+│   ├── node_modules/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Chatbot.jsx
+│   │   │   ├── Loader.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Summary.jsx
+│   │   │   ├── Upload.jsx
+│   │   │
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   ├── styles.css
+│   │
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
 ```
 
-## How to run the Backend
+---
 
-The backend is powered by **FastAPI** and uses **HuggingFace**, **FAISS**, **SentenceTransformers**, and **SpaCy**.
+## 🧩 System Architecture
 
-1. Open a terminal and navigate to the backend folder:
-   ```bash
-   cd AI_Research_Assistant/backend
-   ```
-2. Create and activate a Virtual Environment (Optional but recommended):
-   ```bash
-   python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
-   # On Mac/Linux:
-   source venv/bin/activate
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Run the development server (This will expose APIs on `localhost:9090`):
-   ```bash
-   python main.py
-   ```
-   *(Wait a bit on first upload/summarize for models to hit the cache).*
+1️⃣ User uploads PDF  
+2️⃣ Backend extracts text  
+3️⃣ Keywords extracted using SpaCy  
+4️⃣ Embeddings generated via SentenceTransformers  
+5️⃣ Stored in FAISS vector database  
+6️⃣ Summarizer generates concise overview  
+7️⃣ RAG engine retrieves relevant chunks  
+8️⃣ QA engine generates contextual answers  
 
-## How to run the Frontend
+---
 
-The frontend is an ultra-fast **React + Vite** app with dynamic glassmorphic styles.
+## ⚙️ Backend Setup
 
-1. Open a new terminal and navigate to the frontend folder:
-   ```bash
-   cd AI_Research_Assistant/frontend
-   ```
-2. Install dependencies (you can use npm/yarn):
-   ```bash
-   npm install
-   ```
-3. Start the dev server:
-   ```bash
-   npm run dev
-   ```
-4. Open your browser as instructed by Vite!
+Navigate to backend directory:
 
-## How to connect both
+```bash
+cd AI_Research_Assistant/backend
+```
 
-They are pre-configured to automatically connect out-of-the-box! 
-- The React Frontend automatically routes its HTTP POST requests directly to `http://localhost:9090/...` using the `axios` library inside components like `Upload.jsx`, `Chatbot.jsx`, and `Summary.jsx`.
-- The FastAPI Backend has CORS enabled wide-open `allow_origins=["*"]` to ensure the frontend development port interacts smoothly without blocks.
-"# Research-analyser" 
+Create virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Activate environment:
+
+**Windows**
+```bash
+venv\Scripts\activate
+```
+
+**Mac/Linux**
+```bash
+source venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run server:
+
+```bash
+python main.py
+```
+
+Backend runs at:
+
+```
+http://localhost:9090
+```
+
+---
+
+## 🎨 Frontend Setup
+
+Navigate to frontend directory:
+
+```bash
+cd AI_Research_Assistant/frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run development server:
+
+```bash
+npm run dev
+```
+
+Open the URL shown in terminal.
+
+---
+
+## 🔗 API Integration
+
+Frontend communicates with backend using Axios requests to:
+
+```
+http://localhost:9090
+```
+
+CORS is enabled to allow seamless communication.
+
+---
+
+## 🧠 Core Modules Explained
+
+### 📄 pdf_utils.py
+Handles PDF parsing and text extraction.
+
+### 🔍 keyword_extractor.py
+Extracts important keywords using SpaCy NLP pipeline.
+
+### 🧬 embeddings.py
+Generates vector embeddings using SentenceTransformers.
+
+### 📦 vector_store.py
+Stores and retrieves vectors using FAISS similarity search.
+
+### ✨ summarizer.py
+Generates abstractive summaries using HuggingFace models.
+
+### 🔗 rag_engine.py
+Implements Retrieval Augmented Generation by combining vector retrieval with context injection.
+
+### 🤖 qa_engine.py
+Generates context-aware answers using retrieved document chunks.
+
+### 🚀 main.py
+Defines API endpoints for upload, summarize, and chat.
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|---------|------------|
+| POST | `/upload` | Upload PDF |
+| GET | `/summary` | Generate summary |
+| POST | `/chat` | Ask question |
+
+---
+
+## 💡 Use Cases
+
+- Academic literature review
+- Research paper understanding
+- Knowledge discovery
+- Semantic document search
+- AI research assistant
+
+---
+
+## 🔮 Future Enhancements
+
+- Multi-document knowledge base
+- User authentication
+- Cloud deployment (Docker + AWS)
+- Streaming LLM responses
+- Citation extraction
+- PDF highlighting
+- Conversation memory
+
+---
+
+## 🎓 Learning Outcomes
+
+- Built end-to-end RAG pipeline
+- Implemented vector search with FAISS
+- Integrated Transformer models
+- Designed scalable FastAPI backend
+- Developed modern React frontend
+- Implemented semantic search chatbot
+
+---
+
+## 👨‍💻 Author
+
+AI Research Assistant Project  
+
+---
+
+## 📜 License
+
+MIT License
+
+---
+
+⭐ If you found this project useful, consider giving it a star!
