@@ -12,7 +12,7 @@ export default function Summary({ fileData }) {
         setLoading(true);
         setError(null);
         try {
-            const res = await axios.post('http://localhost:8000/summarize');
+            const res = await axios.post('http://localhost:9090/summarize');
             setSummary(res.data.summary);
         } catch (err) {
             setError('Failed to generate summary');

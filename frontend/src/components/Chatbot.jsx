@@ -27,7 +27,7 @@ export default function Chatbot() {
         setLoading(true);
 
         try {
-            const res = await axios.post('http://localhost:8000/ask-question', { question: userMsg });
+            const res = await axios.post('http://localhost:9090/ask-question', { question: userMsg });
             setMessages(prev => [...prev, { role: 'ai', content: res.data.answer }]);
         } catch (err) {
             setMessages(prev => [...prev, { role: 'ai', content: "Sorry, I couldn't process your question." }]);
