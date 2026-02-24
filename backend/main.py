@@ -9,7 +9,7 @@ from summarizer import generate_summary
 from keyword_extractor import extract_keywords
 from embeddings import get_embedding_model
 from vector_store import index_text_chunks, load_faiss_index
-from qa_engine import answer_question
+from rag_engine import generate_answer
 
 app = FastAPI(title="AI Research Assistant API")
 
@@ -67,17 +67,25 @@ async def summarize_paper():
         summary = generate_summary(CURRENT_DOCUMENT_TEXT)
         return {"summary": summary}
     except Exception as e:
+        import traceback
+        print("SUMMARY ERROR TRACEBACK:")
+        print(traceback.format_exc())
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/ask-question")
 async def ask_question(request: QuestionRequest):
     global CURRENT_DOCUMENT_TEXT
+
     if not CURRENT_DOCUMENT_TEXT:
         raise HTTPException(status_code=400, detail="No document uploaded yet.")
+
     try:
-        answer = answer_question(request.question)
+        answer = generate_answer(request.question)
         return {"answer": answer}
+
     except Exception as e:
+        import traceback
+        print("RAG ERROR:", traceback.format_exc())
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/keywords")
